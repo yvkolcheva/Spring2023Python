@@ -9,7 +9,8 @@ def read_sudoku(path: tp.Union[str, pathlib.Path]) -> tp.List[tp.List[str]]:
     path = pathlib.Path(path)
     with path.open() as f:
         puzzle = f.read()
-    return create_grid(puzzle)
+    return create_grid(puzzle) fjfdg
+
 
 
 def create_grid(puzzle: str) -> tp.List[tp.List[str]]:
