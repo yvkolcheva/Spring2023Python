@@ -9,7 +9,7 @@ def read_sudoku(path: tp.Union[str, pathlib.Path]) -> tp.List[tp.List[str]]:
     path = pathlib.Path(path)
     with path.open() as f:
         puzzle = f.read()
-    return create_grid(puzzle) fjfdg
+    return create_grid(puzzle)
 
 
 
@@ -36,14 +36,18 @@ def display(grid: tp.List[tp.List[str]]) -> None:
 
 def group(values: tp.List[T], n: int) -> tp.List[tp.List[T]]:
     """
-    Сгруппировать значения values в список, состоящий из списков по n элементов
+     Сгруппировать значения values в список, состоящий из списков по n элементов
 
-    >>> group([1,2,3,4], 2)
-    [[1, 2], [3, 4]]
-    >>> group([1,2,3,4,5,6,7,8,9], 3)
-    [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    """
-    pass
+     >>> group([1,2,3,4], 2)
+     [[1, 2], [3, 4]]
+     >>> group([1,2,3,4,5,6,7,8,9], 3)
+     [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+     """
+    a = []
+    for i in range(n):
+        a.append(values[i * n: (i + 1) * n])
+    return a
+
 
 
 def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
