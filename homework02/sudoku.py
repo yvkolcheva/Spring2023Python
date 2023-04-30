@@ -60,6 +60,7 @@ def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str
     >>> get_row([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (2, 0))
     ['.', '8', '9']
     """
+    return grid[pos[0]]
     pass
 
 
@@ -73,6 +74,7 @@ def get_col(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str
     >>> get_col([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (0, 2))
     ['3', '6', '9']
     """
+    return list(posi[pos[1]] for posi in grid)
     pass
 
 
@@ -87,6 +89,54 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     >>> get_block(grid, (8, 8))
     ['2', '8', '.', '.', '.', '5', '.', '7', '9']
     """
+    a,b,c=[],[],[]
+    au=1
+    l=0
+    m=0
+    aaa=0
+    for i in grid: a.append(group(i,3))
+    for j in a:
+        if au==0:
+            au=2
+            continue
+
+        if au==2:
+            au=1
+            continue
+
+        for k in range(3):
+                while l!=3:
+                    z = a[m]
+                    c.append(z[k])
+
+                    m+=1
+                    l+=1
+                    if l==3: break
+                m=aaa
+                b.append(c)
+                c=[]
+                l=0
+                z=j.copy
+                au=0
+        aaa+=3
+        continue
+
+
+
+
+    if pos[0]<3:
+        if pos[1]<3: return (b[0][0]+b[0][1]+b[0][2])
+        elif pos[1]<6: return (b[1][0]+b[1][1]+b[1][2])
+        elif pos[1]<9: return(b[2][0]+b[2][1]+b[2][2])
+    elif pos[0]<6:
+        if pos[1]<3: return (b[3][0]+b[3][1]+b[3][2])
+        elif pos[1]<6: return (b[4][0]+b[4][1]+b[4][2])
+        elif pos[1]<9: return(b[5][0]+b[5][1]+b[5][2])
+    elif pos[0]<9:
+        if pos[1]<3: return (b[6][0]+b[6][1]+b[6][2])
+        elif pos[1]<6: return (b[7][0]+b[7][1]+b[7][2])
+        elif pos[1]<9: return(b[8][0]+b[8][1]+b[8][2])
+
     pass
 
 
@@ -100,6 +150,9 @@ def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.Tuple[in
     >>> find_empty_positions([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
     (2, 0)
     """
+    for i,k in enumerate(grid):
+        for j,l in enumerate(k):
+            if l== ".": return (i,j)
     pass
 
 
