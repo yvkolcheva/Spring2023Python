@@ -6,8 +6,18 @@ app = Flask(__name__)
 db = [
     {
         'time':time.time(),
-        'name':'Юлия',
+        'name':'Julia',
         'text':'Создаю мессенджер',
+    },
+    {
+        'time': time.time(),
+        'name': 'Maks',
+        'text': 'Всё ещё пытаюсь создать',
+    },
+    {
+        'time': time.time(),
+        'name': 'Maks',
+        'text': 'И до сих пор...',
     }
 ]
 @app.route("/")
@@ -16,11 +26,20 @@ def hello():
 
 @app.route('/status')
 def status():
+    User = []
+    count = 0
+    for i in db:
+        if i['name'] not in User:
+            count+=1
+            User.append(i['name'])
+
     dt_now = datetime.now()
     return{'status': True,
            'name':'Messenger',
            'time': dt_now,
-           'users':0
+           'number_of_users': count,
+           'number_of_messages': len(db),
+           'name_users': User,
            }
 
 @app.route('/send', methods=['POST'])
